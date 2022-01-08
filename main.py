@@ -1,31 +1,7 @@
-def up(snake_pos):
+def move(snake_pos, dx=0, dy=0):
     del snake_pos[-1]
     head = snake_pos[0]
-    new_head = (head[0] + 1, head[1])
-    snake_pos.insert(0, new_head)
-    return snake_pos
-
-
-def down(snake_pos):
-    del snake_pos[-1]
-    head = snake_pos[0]
-    new_head = (head[0] - 1, head[1])
-    snake_pos.insert(0, new_head)
-    return snake_pos
-
-
-def right(snake_pos):
-    del snake_pos[-1]
-    head = snake_pos[0]
-    new_head = (head[0], head[1] + 1)
-    snake_pos.insert(0, new_head)
-    return snake_pos
-
-
-def left(snake_pos):
-    del snake_pos[-1]
-    head = snake_pos[0]
-    new_head = (head[0], head[1] - 1)
+    new_head = (head[0] + dx, head[1] + dy)
     snake_pos.insert(0, new_head)
     return snake_pos
 
@@ -36,14 +12,11 @@ def snake(board_size, snake_len, steps):
     for step in steps:
         current = step or current
         if current == "left":
-            snake = left(snake)
+            snake = move(snake, dy=-1)
         if current == "right":
-            snake = right(snake)
+            snake = move(snake, dy=1)
         if current == "up":
-            snake = up(snake)
+            snake = move(snake, dx=1)
         if current == "down":
-            snake = down(snake)
+            snake = move(snake, dx=-1)
     return snake
-
-
-
